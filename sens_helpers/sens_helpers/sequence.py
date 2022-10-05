@@ -7,6 +7,11 @@ import pickle
 import re
 from pathlib import Path
 
+# Getting template files
+import importlib.resources as pkg_resources
+from . import templates  
+tally_template = pkg_resources.read_text(templates, 'tallies.xml')
+
 import openmc
 
 def mkdir(directory):
@@ -31,6 +36,7 @@ def replace_line(filename, old, new_str):
 def initialize_adjoint_run(clean_dir, nmesh, nbatches, nparticles):
     # import the current simulation and output an appropriate tally file 
     # to initiate the simulation
+    print('loading file', clean_dir + 'materials.xml')
     materials = openmc.Materials.from_xml(clean_dir + 'materials.xml')
     settings = openmc.Settings.from_xml(clean_dir + 'settings.xml')
     geometry = openmc.Geometry.from_xml(clean_dir + 'geometry.xml')
@@ -70,8 +76,9 @@ def initialize_adjoint_run(clean_dir, nmesh, nbatches, nparticles):
     cur_tally = './tallies.xml'
     if os.path.exists(cur_tally):
         os.remove(cur_tally)
-    tally_file = '../templates/tallies.xml'
-    shutil.copyfile(tally_file, cur_tally)
+    with open(cur_tally, 'w') as f:
+        for line in tally_template:
+            f.write(line)
 
     # Write mesh info to tally xml
     old = "MESH_XML"
@@ -203,25 +210,23 @@ def initialize_sensitivity_run(adjoint, mesh, nuclides, reactions, e_grid,
 def run_sensitivity_sequence(xml_dir, nmesh, adj_nbatches, adj_nparticles,
                              clutch_nbatches, clutch_nparticles,
                              sens_nuclides, sens_rxns, sens_e_grid,
-                             folder_suffix='_sensitivity'):
+                             sens_run_dir=None):
     """
     xml_dir: path to directory with clean xmls
     nmesh: number of segments in each dimension for adjoint mesh (n x n x n)
     nbatchs: number of batches to run
     nparticles: number of particles per batch
-    folder_suffix: appended to clean folder name, where sensitivity run is stored
     """
 
     sp_file = 'statepoint.{:d}.h5'.format(adj_nbatches)
     basedir = os.getcwd()
-    rxns = ['fission', 'absorption', 'elastic']
-    nuclides = ['Al27', 'U235', 'U238']
     e_grid = np.logspace(np.log10(1e-5), np.log10(2e7), 50)
     clean_dir = basedir + '/' + xml_dir
-    print('Clean xmls found in: {:s}'.format(clean_dir))
-    sens_dir = basedir + '/'  + xml_dir[:-1] + folder_suffix
+    print('Clean xml directory: {:s}'.format(clean_dir))
+    if sens_run_dir is None:
+        sens_dir = 'sensitivity_run/' 
     mkdir(sens_dir)
-    print('Sensitivity run will be stored in : {:s}'.format(sens_dir))
+    print('Sensitivity run directory : {:s}'.format(sens_dir))
     os.chdir(sens_dir)
 
     print('Initializing adjoint run')
