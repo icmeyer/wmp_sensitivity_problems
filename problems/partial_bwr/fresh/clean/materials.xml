@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<materials>
+  <material depletable="true" id="3" name="gd_fuel" temperature="900">
+    <density units="g/cc" value="10.0" />
+    <nuclide ao="8.891599898528504e-05" name="U234" />
+    <nuclide ao="0.00994793002822215" name="U235" />
+    <nuclide ao="0.31745432589442574" name="U238" />
+    <nuclide ao="4.556629767969077e-05" name="U236" />
+    <nuclide ao="0.6548252035910553" name="O16" />
+    <nuclide ao="0.00024827284757023916" name="O17" />
+    <nuclide ao="3.47795706841228e-05" name="Gd152" />
+    <nuclide ao="0.00037909732045693855" name="Gd154" />
+    <nuclide ao="0.002573688230625087" name="Gd155" />
+    <nuclide ao="0.0035596890595199684" name="Gd156" />
+    <nuclide ao="0.0027215014060326093" name="Gd157" />
+    <nuclide ao="0.004319622678968052" name="Gd158" />
+    <nuclide ao="0.0038014070757746224" name="Gd160" />
+  </material>
+  <material depletable="true" id="4" name="uo2_fuel" temperature="900">
+    <density units="g/cc" value="10.0" />
+    <nuclide ao="0.0002714687807807027" name="U234" />
+    <nuclide ao="0.030371951807009787" name="U235" />
+    <nuclide ao="0.9692174612847976" name="U238" />
+    <nuclide ao="0.00013911812741195577" name="U236" />
+    <nuclide ao="1.999242" name="O16" />
+    <nuclide ao="0.000758" name="O17" />
+  </material>
+  <material id="5" name="zirc2" temperature="573.15">
+    <density units="g/cc" value="6.55" />
+    <nuclide ao="0.006793424316" name="O16" />
+    <nuclide ao="2.575684e-06" name="O17" />
+    <nuclide ao="7.573335e-05" name="Cr50" />
+    <nuclide ao="0.00146044227" name="Cr52" />
+    <nuclide ao="0.00016560242999999998" name="Cr53" />
+    <nuclide ao="4.122195e-05" name="Cr54" />
+    <nuclide ao="9.486435e-05" name="Fe54" />
+    <nuclide ao="0.00148916742" name="Fe56" />
+    <nuclide ao="3.439137e-05" name="Fe57" />
+    <nuclide ao="4.57686e-06" name="Fe58" />
+    <nuclide ao="0.0005255536679999999" name="Ni58" />
+    <nuclide ao="0.000202442332" name="Ni60" />
+    <nuclide ao="8.800028e-06" name="Ni61" />
+    <nuclide ao="2.805834e-05" name="Ni62" />
+    <nuclide ao="7.145632000000001e-06" name="Ni64" />
+    <nuclide ao="0.5033770244999999" name="Zr90" />
+    <nuclide ao="0.10977434819999998" name="Zr91" />
+    <nuclide ao="0.1677923415" name="Zr92" />
+    <nuclide ao="0.1700426178" name="Zr94" />
+    <nuclide ao="0.027394668" name="Zr96" />
+    <nuclide ao="0.0001036542" name="Sn112" />
+    <nuclide ao="7.05276e-05" name="Sn114" />
+    <nuclide ao="3.63324e-05" name="Sn115" />
+    <nuclide ao="0.0015537443999999998" name="Sn116" />
+    <nuclide ao="0.0008206847999999999" name="Sn117" />
+    <nuclide ao="0.0025881491999999997" name="Sn118" />
+    <nuclide ao="0.0009179273999999999" name="Sn119" />
+    <nuclide ao="0.0034814987999999994" name="Sn120" />
+    <nuclide ao="0.0004947618" name="Sn122" />
+    <nuclide ao="0.0006187193999999999" name="Sn124" />
+  </material>
+  <material id="6" name="moderator" temperature="559.15">
+    <density units="g/cc" value="0.74" />
+    <nuclide ao="1.99968852" name="H1" />
+    <nuclide ao="0.00031148" name="H2" />
+    <nuclide ao="0.999621" name="O16" />
+    <nuclide ao="0.000379" name="O17" />
+  </material>
+</materials>

@@ -42,7 +42,7 @@ def initialize_adjoint_run(clean_dir, nmesh, nbatches, nparticles):
     geometry = openmc.Geometry.from_xml(clean_dir + 'geometry.xml')
 
     settings.temperature['method'] = 'nearest'
-    settings.temperature['tolerance'] = 100
+    settings.temperature['tolerance'] = 1000
     settings.temperature['multipole'] = True
 
     settings.particles = nparticles
@@ -54,12 +54,29 @@ def initialize_adjoint_run(clean_dir, nmesh, nbatches, nparticles):
     lengths = box[1] - box[0]
     pitch = lengths/nmesh
     lattice = openmc.RectLattice()
-    lattice.lower_left = box[0]
-    lattice.pitch = pitch
+
+    # Determine if problem is 2D
+    if np.isinf(box[1][2]):
+        is2D = True
+    else:
+        is2D = False
+
+    if is2D:
+        lattice.lower_left = box[0][:2]
+        lattice.pitch = pitch[:2]
+    else:
+        lattice.lower_left = box[0]
+        lattice.pitch = pitch
+
+
     # Fill lattice with universes
     u = openmc.Universe()
-    univ_array = np.empty((nmesh, nmesh, nmesh), dtype=openmc.Universe)
-    univ_array[:, :, :] = u
+    if is2D:
+        univ_array = np.empty((nmesh, nmesh), dtype=openmc.Universe)
+        univ_array[:, :] = u
+    else:
+        univ_array = np.empty((nmesh, nmesh, nmesh), dtype=openmc.Universe)
+        univ_array[:, :, :] = u
     lattice.universes = univ_array
     # Extract mesh
     mesh =  openmc.RegularMesh.from_rect_lattice(lattice)
@@ -83,15 +100,23 @@ def initialize_adjoint_run(clean_dir, nmesh, nbatches, nparticles):
     # Write mesh info to tally xml
     old = "MESH_XML"
     mesh_lines = ''
-    mesh_lines += '  <dimension>{:d} {:d} {:d}</dimension>'\
-                  '\n'.format(nmesh,nmesh,nmesh)
-    mesh_lines += '  <lower_left>{:f} {:f} {:f}</lower_left>'\
-                  '\n'.format(box[0][0], box[0][1], box[0][2])
-    mesh_lines += '  <upper_right>{:f} {:f} {:f}</upper_right>'\
-                  ''.format(box[1][0], box[1][1], box[1][2])
+    if is2D:
+        mesh_lines += '  <dimension>{:d} {:d} </dimension>'\
+                      '\n'.format(nmesh,nmesh)
+        mesh_lines += '  <lower_left>{:f} {:f} </lower_left>'\
+                      '\n'.format(box[0][0], box[0][1])
+        mesh_lines += '  <upper_right>{:f} {:f}</upper_right>'\
+                      ''.format(box[1][0], box[1][1])
+    else:
+        mesh_lines += '  <dimension>{:d} {:d} {:d}</dimension>'\
+                      '\n'.format(nmesh,nmesh,nmesh)
+        mesh_lines += '  <lower_left>{:f} {:f} {:f}</lower_left>'\
+                      '\n'.format(box[0][0], box[0][1], box[0][2])
+        mesh_lines += '  <upper_right>{:f} {:f} {:f}</upper_right>'\
+                      ''.format(box[1][0], box[1][1], box[1][2])
     replace_line('./tallies.xml', old, mesh_lines)
 
-    return mesh
+    return mesh, is2D
 
 def get_adjoint(sp_file, mesh_dim):
     # Copy statepoint file if desired later
@@ -230,11 +255,16 @@ def run_sensitivity_sequence(xml_dir, nmesh, adj_nbatches, adj_nparticles,
     os.chdir(sens_dir)
 
     print('Initializing adjoint run')
-    mesh = initialize_adjoint_run(clean_dir, nmesh, adj_nbatches, adj_nparticles)
+    mesh, is2D = initialize_adjoint_run(clean_dir, nmesh, adj_nbatches, 
+                                        adj_nparticles)
     print('Executing adjoint run')
     openmc.run()
 
-    mesh_dim = nmesh**3
+    if is2D:
+        mesh_dim = nmesh**2
+    else:
+        mesh_dim = nmesh**3 
+
     print('Loading adjoint from {:s}'.format(sp_file))
     adjoint = get_adjoint(sp_file, mesh_dim)
 
