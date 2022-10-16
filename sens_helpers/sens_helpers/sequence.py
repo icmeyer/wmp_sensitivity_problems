@@ -5,6 +5,7 @@ import copy
 import os
 import pickle
 import re
+import socket
 from pathlib import Path
 
 # Getting template files
@@ -272,6 +273,10 @@ def run_sensitivity_sequence(xml_dir, nmesh, adj_nbatches, adj_nparticles,
     initialize_sensitivity_run(adjoint, mesh, sens_nuclides, sens_rxns, 
                                sens_e_grid, clutch_nbatches, clutch_nparticles)
     print('Executing sensitivity run')
-    openmc.run()
+    # Determine if we are on the cluster
+    if re.search("cluster", socket.gethostname()):
+        openmc.run(threads=16)
+    else:
+        openmc.run(threads=4)
 
     os.chdir(basedir)
