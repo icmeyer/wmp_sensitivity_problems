@@ -13,7 +13,7 @@ rxns = ['fission', 'absorption', 'elastic']
 nuclides = ['U235', 
             'Gd154',
             'Gd157']
-sens_e_grid = np.geomspace(1e-5, 2e7, 20)
+sens_e_grid = sens_helpers.GROUPS['SCALE-252'][::-1]
 # Clean xml directory, include '/' at end of directory string
 xml_dir = 'clean/'
 
