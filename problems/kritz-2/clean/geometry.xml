@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='utf-8'?>
+<geometry>
+  <cell fill="1" id="1001" region="1006 -1005 2006 -2005 3000 -3001" translation="-42.7 -42.7 0.0" universe="0" />
+  <cell fill="4" id="1004" region="1006 -1005 2006 -2005 3001 -3002" translation="-42.7 -42.7 0.0" universe="0" />
+  <cell id="2000" material="3" region="2002 -2001 1002 -1001 ~(1006 -1005 2006 -2005) 3003 -3001" universe="0" />
+  <cell id="2001" material="4" region="2004 -2002 1002 -1001 3003 -3002" universe="0" />
+  <cell id="2002" material="4" region="-2003 2001 1002 -1001 3003 -3002" universe="0" />
+  <cell id="2003" material="4" region="-1002 1004 2004 -2003 3003 -3002" universe="0" />
+  <cell id="2004" material="4" region="-1003 1001 2004 -2003 3003 -3002" universe="0" />
+  <cell id="2010" material="5" region="2002 -2001 1002 -1001 ~(1006 -1005 2006 -2005) 3001 -3002" universe="0" />
+  <cell fill="6" id="2011" region="1006 -1005 2006 -2005 3004 -3000" translation="-42.7 -42.7 0.0" universe="0" />
+  <cell id="2012" material="3" region="1006 -1005 2006 -2005 3003 -3004" universe="0" />
+  <cell id="3000" material="5" region="-800 -2004 1004 -1003 3003 -3002" universe="0" />
+  <cell id="3001" material="5" region="-800 2003 1004 -1003 3003 -3002" universe="0" />
+  <cell id="3002" material="5" region="-800 -1004 3003 -3002" universe="0" />
+  <cell id="3003" material="5" region="-800 1003 3003 -3002" universe="0" />
+  <cell id="3004" material="4" region="-801 800 3003 -3002" universe="0" />
+  <cell id="4000" material="3" region="-900 801 3003 -3001" universe="0" />
+  <cell id="4001" material="4" region="-901 900 3003 -3002" universe="0" />
+  <cell id="4002" material="5" region="-900 801 3001 -3002" universe="0" />
+  <cell id="5000" material="1" region="-100" universe="2" />
+  <cell id="5002" material="2" region="-102 100" universe="2" />
+  <cell id="5003" material="3" region="102" universe="2" />
+  <cell id="6000" material="1" region="-100" universe="3" />
+  <cell id="6002" material="2" region="-102 100" universe="3" />
+  <cell id="6003" material="5" region="102" universe="3" />
+  <cell id="7000" material="4" region="-200" universe="5" />
+  <cell id="7001" material="3" region="200" universe="5" />
+  <!--
+  <cell id="9000" material="void" region="(901 3003 -3002) | -3003 | 3002 | 901" universe="0" />
+  -->
+  <lattice id="1">
+    <pitch>1.8 1.8</pitch>
+    <dimension>25 24</dimension>
+    <lower_left>-0.9 -0.9</lower_left>
+    <universes>
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 </universes>
+  </lattice>
+  <lattice id="4">
+    <pitch>1.8 1.8</pitch>
+    <dimension>25 24</dimension>
+    <lower_left>-0.9 -0.9</lower_left>
+    <universes>
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </universes>
+  </lattice>
+  <lattice id="6">
+    <pitch>1.8 1.8</pitch>
+    <dimension>25 24</dimension>
+    <lower_left>-0.9 -0.9</lower_left>
+    <universes>
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 </universes>
+  </lattice>
+  <surface coeffs="0.0 0.0 0.4725" id="100" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 0.5395" id="102" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 0.5" id="200" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 76.6" id="800" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 76.9" id="801" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 77.9" id="900" type="z-cylinder" />
+  <surface boundary="vacuum" coeffs="0.0 0.0 80.0" id="901" type="z-cylinder" />
+  <surface coeffs="53.5" id="1001" type="x-plane" />
+  <surface coeffs="-53.5" id="1002" type="x-plane" />
+  <surface coeffs="53.8" id="1003" type="x-plane" />
+  <surface coeffs="-53.8" id="1004" type="x-plane" />
+  <surface coeffs="1.4" id="1005" type="x-plane" />
+  <surface coeffs="-43.6" id="1006" type="x-plane" />
+  <surface coeffs="53.5" id="2001" type="y-plane" />
+  <surface coeffs="-53.5" id="2002" type="y-plane" />
+  <surface coeffs="53.8" id="2003" type="y-plane" />
+  <surface coeffs="-53.8" id="2004" type="y-plane" />
+  <surface coeffs="-0.4" id="2005" type="y-plane" />
+  <surface coeffs="-43.6" id="2006" type="y-plane" />
+  <surface coeffs="0.0" id="3000" type="z-plane" />
+  <surface coeffs="66.56" id="3001" type="z-plane" />
+  <surface boundary="vacuum" coeffs="123.2" id="3002" type="z-plane" />
+  <surface boundary="vacuum" coeffs="-40.0" id="3003" type="z-plane" />
+  <surface coeffs="-8.0" id="3004" type="z-plane" />
+</geometry>
