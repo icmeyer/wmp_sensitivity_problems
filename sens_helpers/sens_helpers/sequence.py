@@ -218,9 +218,9 @@ def initialize_sensitivity_run(adjoint, mesh, nuclides, reactions, e_grid,
     # Load key nuclides if necessary
     if nuclides=='KEY':
         # Find key nuclides that are in materials file
-        materials = openmc.Settings.from_xml('settings.xml')
+        materials = openmc.Materials.from_xml('materials.xml')
         nucs = []
-        for mat in mats:
+        for mat in materials:
             for nuc in mat.nuclides:
                 nucs.append(nuc.name)
         nucs = list(set(nucs))
