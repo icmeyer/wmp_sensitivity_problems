@@ -8,12 +8,15 @@ import re
 import socket
 from pathlib import Path
 
+import openmc
+
 # Getting template files
+from .data import KEY_NUCLIDES
 import importlib.resources as pkg_resources
 from . import templates  
 tally_template = pkg_resources.read_text(templates, 'tallies.xml')
 
-import openmc
+
 
 def mkdir(directory):
     if os.path.exists(directory):
@@ -211,6 +214,21 @@ def initialize_sensitivity_run(adjoint, mesh, nuclides, reactions, e_grid,
     # importance_mesh
     adjoint_filter = openmc.ImportanceFilter(adjoint, mesh) 
     sens_list = []
+
+    # Load key nuclides if necessary
+    if nuclides=='KEY':
+        # Find key nuclides that are in materials file
+        materials = openmc.Settings.from_xml('settings.xml')
+        nucs = []
+        for mat in mats:
+            for nuc in mat.nuclides:
+                nucs.append(nuc.name)
+        nucs = list(set(nucs))
+        nuclides = []
+        for key_nuc in KEY_NUCLIDES:
+            if key_nuc in nucs:
+                nuclides.append(key_nuc)
+
     for nuclide in nuclides:
         # Multipole
         sens_tally = make_sensitivity_tally('multipole', nuclide, adjoint_filter)
@@ -242,6 +260,7 @@ def run_sensitivity_sequence(xml_dir, nmesh, adj_nbatches, adj_nparticles,
     nmesh: number of segments in each dimension for adjoint mesh (n x n x n)
     nbatchs: number of batches to run
     nparticles: number of particles per batch
+    sens_nuclides: one of "KEY" or list of nuclides
     """
 
     sp_file = 'statepoint.{:d}.h5'.format(adj_nbatches)
