@@ -133,3 +133,5 @@ dmypy.json
 
 # Sensitivity results
 sensitivity_run/
+# Slurm outputs
+slurm-*
