@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<settings>
+  <run_mode>eigenvalue</run_mode>
+  <particles>10000</particles>
+  <batches>1000</batches>
+  <inactive>10</inactive>
+  <source strength="1.0">
+    <space type="fission">
+      <parameters>-0.63 -0.63 -0.63 0.63 0.63 0.63</parameters>
+    </space>
+  </source>
+  <output>
+    <tallies>true</tallies>
+  </output>
+  <temperature_method>nearest</temperature_method>
+  <temperature_multipole>true</temperature_multipole>
+  <temperature_tolerance>1000</temperature_tolerance>
+</settings>
