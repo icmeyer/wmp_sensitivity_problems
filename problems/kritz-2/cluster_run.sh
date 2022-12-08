@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=fresh_bwr  # Job name
+#SBATCH --job-name=kritz2  # Job name
 #SBATCH --ntasks=12           # Number of tasks
 # #SBATCH --mem=32gb          # Job memory request
 #SBATCH --time=48:00:00       # Time limit hrs:min:sec
