@@ -4,22 +4,13 @@ import sens_helpers
 
 nmesh = 10
 adj_nbatches = 100
-adj_nparticles = 100000
+adj_nparticles = int(1e6)
 clutch_nbatches = 100
-clutch_nparticles = 100000
+clutch_nparticles = int(1e6)
 # Sensitivities will be evaluated w.r.t. multipole parameters as well
 # as across the energy bins defined by sens_e_grid by default
 rxns = ['fission', 'absorption', 'elastic']
-nuclides = ['H1', 'H2',
-            'O16', 'O17', 
-            'Fe54', 'Fe56', 'Fe57', 'Fe58',
-            'Cr50', 'Cr52', 'Cr53', 'Cr54',
-            'Ni58', 'Ni60', 'Ni61', 'Ni62', 'Ni64', 
-            'Zr90', 'Zr91', 'Zr92', 'Zr94', 'Zr96',
-            'Gd152','Gd154', 'Gd155', 'Gd156', 'Gd157', 'Gd158', 'Gd160',
-            'U234', 'U235', 'U236', 'U238',
-            'Pu236', 'Pu238', 'Pu239', 'Pu240', 'Pu241', 'Pu242', 'Pu243'
-            ]
+nuclides = 'KEY'
 sens_e_grid = sens_helpers.GROUPS['SCALE-252'][::-1]
 # Clean xml directory, include '/' at end of directory string
 xml_dir = 'clean/'
