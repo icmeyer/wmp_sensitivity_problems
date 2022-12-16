@@ -265,7 +265,7 @@ def run_sensitivity_sequence(xml_dir, nmesh, adj_nbatches, adj_nparticles,
 
     sp_file = 'statepoint.{:d}.h5'.format(adj_nbatches)
     basedir = os.getcwd()
-    e_grid = np.logspace(np.log10(1e-5), np.log10(2e7), 50)
+    e_grid = np.geomspace(1e-5, 2e7, 1000)
     clean_dir = basedir + '/' + xml_dir
     print('Clean xml directory: {:s}'.format(clean_dir))
     if sens_run_dir is None:
