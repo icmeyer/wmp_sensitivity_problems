@@ -4,9 +4,9 @@ import sens_helpers
 
 nmesh = 10
 adj_nbatches = 100
-adj_nparticles = int(1e6)
+adj_nparticles = int(1e5)
 clutch_nbatches = 100
-clutch_nparticles = int(1e6)
+clutch_nparticles = int(1e5)
 # Sensitivities will be evaluated w.r.t. multipole parameters as well
 # as across the energy bins defined by sens_e_grid by default
 rxns = ['fission', 'absorption', 'elastic']

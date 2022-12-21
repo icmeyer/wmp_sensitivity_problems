@@ -2,7 +2,7 @@
 #SBATCH --job-name=4mwd_bwr  # Job name
 #SBATCH --ntasks=12           # Number of tasks
 # #SBATCH --mem=32gb          # Job memory request
-#SBATCH --time=48:00:00       # Time limit hrs:min:sec
+#SBATCH -t 4-00:00            # Time limit: (D-HH:MM)
 
 # Load modules
 module purge
