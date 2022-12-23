@@ -1,4 +1,4 @@
-import pickle
+import pickle5 as pickle
 import numpy as np
 import re
 import shutil
@@ -23,7 +23,7 @@ def freshdir(directory):
     else:
         os.mkdir(directory)
 
-def plot_slice(fig, ax, data, axis, n, nmesh, error=False):
+def plot_slice(fig, ax, data, axis, n, nmesh, is2D, error=False):
     if np.any(~np.isnan(data)):
         vmax  = np.max(data[~np.isnan(data)])
         vmin  = np.min(data[~np.isnan(data)])
@@ -31,7 +31,7 @@ def plot_slice(fig, ax, data, axis, n, nmesh, error=False):
         vmax = 0
         vmin = 0
 
-    cmap = 'jet'
+    cmap = 'inferno'
     gcf = ax.imshow(data, origin='lower', cmap=cmap, vmin=vmin, vmax=vmax)
     divider = make_axes_locatable(ax)
     cax = divider.append_axes("right", size="5%", pad=0.05)
@@ -41,7 +41,10 @@ def plot_slice(fig, ax, data, axis, n, nmesh, error=False):
     else:
         cbar.set_label('')
     
-    ax.set_title('{:s}-Axis Slice: {:d}/{:d}'.format(axis, n+1, nmesh))
+    if is2D:
+        ax.set_title('{:s}'.format(axis, n+1, nmesh))
+    else:
+        ax.set_title('{:s}-Axis Slice: {:d}/{:d}'.format(axis, n+1, nmesh))
 
 def plot_source(is2D=False):
     with open('source.pkl','rb') as f:
@@ -49,53 +52,82 @@ def plot_source(is2D=False):
     source = source_dict['source']
     source_sd = source_dict['source_sd']
 
-    nmesh = int(np.round(len(source)**(1/3)))
-    source = source.reshape([nmesh, nmesh, nmesh], order='C')
-    source_sd = source_sd.reshape([nmesh, nmesh, nmesh], order='C')
-
-    figures = []
-    for n in range(nmesh):
+    if is2D:
+        nmesh = int(np.round(len(source)**(1/2)))
+        source = source.reshape([nmesh, nmesh], order='C')
+        source_sd = source_sd.reshape([nmesh, nmesh], order='C')
         fig = plt.figure(figsize=(11,8))
-        fig.suptitle('Source Tally')
 
-        means = [source[n, :, :], source[:, n, :], source[:, :, n]]
-        sds = [source_sd[n, :, :], source_sd[:, n, :], source_sd[:, :, n]]
-        axis_names = ['z', 'y', 'x']
-
-        for i in range(3):
-            ax = fig.add_subplot(2,3,i+1)
-            plot_slice(fig, ax, means[i], axis_names[i], n, nmesh)
-            ax = fig.add_subplot(2,3,i+4)
-            plot_slice(fig, ax, means[i]/sds[i]*100, axis_names[i], n, nmesh, error=True)
+        ax = fig.add_subplot(1,2,1)
+        plot_slice(fig, ax, source, '2D Source', 0, nmesh, is2D)
+        ax = fig.add_subplot(1,2,2)
+        plot_slice(fig, ax, source/source_sd*100, 'Relative Error', 0, nmesh, is2D, error=True)
 
         fig.tight_layout()
-        figures.append(fig)
+        return [fig]
 
-    return figures
+    else:
+        nmesh = int(np.round(len(source)**(1/3)))
+        source = source.reshape([nmesh, nmesh, nmesh], order='C')
+        source_sd = source_sd.reshape([nmesh, nmesh, nmesh], order='C')
 
-def plot_adjoint():
+        figures = []
+        for n in range(nmesh):
+            fig = plt.figure(figsize=(11,8))
+            fig.suptitle('Source Tally')
+
+            means = [source[n, :, :], source[:, n, :], source[:, :, n]]
+            sds = [source_sd[n, :, :], source_sd[:, n, :], source_sd[:, :, n]]
+            axis_names = ['z', 'y', 'x']
+
+            for i in range(3):
+                ax = fig.add_subplot(2,3,i+1)
+                plot_slice(fig, ax, means[i], axis_names[i], n, nmesh, is2D)
+                ax = fig.add_subplot(2,3,i+4)
+                plot_slice(fig, ax, means[i]/sds[i]*100, axis_names[i], n, nmesh, is2D, error=True)
+
+            fig.tight_layout()
+            figures.append(fig)
+
+        return figures
+
+def plot_adjoint(is2D=False):
     with open('adjoint.pkl','rb') as f:
         adjoint = pickle.load(f)
 
-    nmesh = int(np.round(len(adjoint)**(1/3)))
-    adjoint = adjoint.reshape([nmesh, nmesh, nmesh], order='C')
+    if is2D:
+        nmesh = int(np.round(len(adjoint)**(1/2)))
+        adjoint = adjoint.reshape([nmesh, nmesh], order='C')
 
-    figures = []
-    for n in range(nmesh):
+        figures = []
         fig = plt.figure(figsize=(11,4))
         fig.suptitle('Adjoint')
-
-        means = [adjoint[n, :, :], adjoint[:, n, :], adjoint[:, :, n]]
-        axis_names = ['z', 'y', 'x']
-
-        for i in range(3):
-            ax = fig.add_subplot(1,3,i+1)
-            plot_slice(fig, ax, means[i], axis_names[i], n, nmesh)
+        ax = fig.add_subplot(1,1,1)
+        plot_slice(fig, ax, adjoint, '2D Adjoint', 0, nmesh, is2D)
 
         fig.tight_layout()
-        figures.append(fig)
+        return [fig]
 
-    return figures
+    else:
+        nmesh = int(np.round(len(adjoint)**(1/3)))
+        adjoint = adjoint.reshape([nmesh, nmesh, nmesh], order='C')
+
+        figures = []
+        for n in range(nmesh):
+            fig = plt.figure(figsize=(11,4))
+            fig.suptitle('Adjoint')
+
+            means = [adjoint[n, :, :], adjoint[:, n, :], adjoint[:, :, n]]
+            axis_names = ['z', 'y', 'x']
+
+            for i in range(3):
+                ax = fig.add_subplot(1,3,i+1)
+                plot_slice(fig, ax, means[i], axis_names[i], n, nmesh)
+
+            fig.tight_layout()
+            figures.append(fig)
+
+        return figures
 
 def is_number(s):
     try:
@@ -212,10 +244,13 @@ def plot_all_sens(nuclides, reactions, var_words):
     for nuc in nuclides:
         for reaction in reactions:
             for var_word in var_words:
-                title = nuc+' '+reaction+' '+var_word
                 if var_word in ['multipole', 'curve fit']:
-                    fig = plot_wmp_sens(sens_dict, nuc, var_word, reaction, title)
+                    if reaction==reaction[0]:
+                        # Only plot wmp parameters and curve fit once
+                        title = nuc+' '+var_word
+                        fig = plot_wmp_sens(sens_dict, nuc, var_word, reaction, title)
                 elif var_word == 'cross_section':
+                    title = nuc+' '+reaction+' '+var_word
                     fig = plot_xs_sens(sens_dict, nuc, var_word, reaction, title)
                 figs.append(fig)
                 fig_names.append('{:s}_{:s}_{:s}'.format(nuc, reaction, var_word))
