@@ -12,6 +12,7 @@ import openmc
 
 # Getting template files
 from .data import KEY_NUCLIDES
+from .openmc_help import get_nucs_from_mat_xml
 import importlib.resources as pkg_resources
 from . import templates  
 tally_template = pkg_resources.read_text(templates, 'tallies.xml')
@@ -216,14 +217,9 @@ def initialize_sensitivity_run(adjoint, mesh, nuclides, reactions, e_grid,
     sens_list = []
 
     # Load key nuclides if necessary
+
     if nuclides=='KEY':
-        # Find key nuclides that are in materials file
-        materials = openmc.Materials.from_xml('materials.xml')
-        nucs = []
-        for mat in materials:
-            for nuc in mat.nuclides:
-                nucs.append(nuc.name)
-        nucs = list(set(nucs))
+        nucs = get_nucs_from_mat_xml('materials.xml')
         nuclides = []
         for key_nuc in KEY_NUCLIDES:
             if key_nuc in nucs:
