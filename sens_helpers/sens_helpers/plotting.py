@@ -54,8 +54,9 @@ def plot_source(is2D=False):
 
     if is2D:
         nmesh = int(np.round(len(source)**(1/2)))
-        source = source.reshape([nmesh, nmesh], order='C')
-        source_sd = source_sd.reshape([nmesh, nmesh], order='C')
+        source = source.reshape([nmesh, nmesh], order='F')
+        print(source)
+        source_sd = source_sd.reshape([nmesh, nmesh], order='F')
         fig = plt.figure(figsize=(11,8))
 
         ax = fig.add_subplot(1,2,1)
@@ -202,6 +203,13 @@ def get_all_tallies(tally_xml, tally_out):
 def hist_y(x):
     return np.hstack([x[0], x])
 
+def plot_sens_err(ax, e_bins, sens, sens_sd=None, label=''):
+    mids = (e_bins[:-1] + e_bins[1:])/2
+    step = ax.step(e_bins, hist_y(sens), label=label)
+    if sens_sd is not None:
+        ax.errorbar(mids, sens, yerr=sens_sd, capsize=2, 
+                    capthick=1, fmt=' ', color=step[0].get_color())
+
 def plot_xs_sens(sens_dict, nuc, var, reaction, title):
     fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -209,9 +217,9 @@ def plot_xs_sens(sens_dict, nuc, var, reaction, title):
     e_bins = sens_dict[nuc][var][reaction]['energy']
     sens = sens_dict[nuc][var][reaction]['mean']
     sd = sens_dict[nuc][var][reaction]['sd']
-    mids = (e_bins[:-1] + e_bins[1:])/2
-    step = ax.step(e_bins, hist_y(sens))
-    ax.errorbar(mids, sens, yerr=sd, capsize=2, capthick=1, fmt=' ', color=step[0].get_color())
+
+    plot_sens_err(ax, e_bins, sens, sd)
+
     ax.set_ylabel('Sensitivity')
     ax.set_xlabel('Energy (eV)')
     ax.set_title(title)
@@ -244,7 +252,7 @@ def plot_all_sens(nuclides, reactions, var_words):
     for nuc in nuclides:
         for reaction in reactions:
             for var_word in var_words:
-                if var_word in ['multipole', 'curve fit']:
+                if var_word in ['multipole', 'curve_fit']:
                     if reaction==reaction[0]:
                         # Only plot wmp parameters and curve fit once
                         title = nuc+' '+var_word

@@ -11,3 +11,7 @@ KEY_NUCLIDES = ['H1', 'H2',
                 'U234', 'U235', 'U236', 'U238',
                 'Pu236', 'Pu238', 'Pu239', 'Pu240', 'Pu241', 'Pu242'
                 ]
+
+RXN2MT = {'elastic': 2,
+          'absorption': 102,
+          'fission': 18}
