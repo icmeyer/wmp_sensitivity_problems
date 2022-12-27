@@ -2,7 +2,7 @@ import numpy as np
 
 import sens_helpers
 
-nmesh = 10
+nmesh = 21
 adj_nbatches = 100
 adj_nparticles = int(1e6)
 clutch_nbatches = 100
