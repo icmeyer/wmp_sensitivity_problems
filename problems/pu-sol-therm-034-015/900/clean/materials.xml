@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<materials>
+  <material id="1" name="fissile solution" depletable="true" temperature="900">
+    <density units="sum" />
+    <nuclide name="Pu238" ao="4.0405e-07" />
+    <nuclide name="Pu239" ao="0.0008292" />
+    <nuclide name="Pu240" ao="7.6302e-05" />
+    <nuclide name="Pu241" ao="7.7173e-06" />
+    <nuclide name="Pu242" ao="4.4252e-07" />
+    <nuclide name="Gd152" ao="1.55098e-07" />
+    <nuclide name="Gd154" ao="1.6905682e-06" />
+    <nuclide name="Gd155" ao="1.1477252e-05" />
+    <nuclide name="Gd156" ao="1.5874280299999998e-05" />
+    <nuclide name="Gd157" ao="1.21364185e-05" />
+    <nuclide name="Gd158" ao="1.92631716e-05" />
+    <nuclide name="Gd160" ao="1.69522114e-05" />
+    <nuclide name="H1" ao="0.048973" />
+    <nuclide name="N14" ao="0.0061360410482000005" />
+    <nuclide name="N15" ao="2.25589518e-05" />
+    <nuclide name="O16" ao="0.041712185088" />
+    <nuclide name="O17" ao="1.5814912e-05" />
+    <sab name="c_H_in_H2O" />
+  </material>
+  <material id="2" name="304L stainless steel" temperature="900">
+    <density units="sum" />
+    <nuclide name="Fe54" ao="0.0036985991000000004" />
+    <nuclide name="Fe56" ao="0.05806009612" />
+    <nuclide name="Fe57" ao="0.0013408608200000001" />
+    <nuclide name="Fe58" ao="0.00017844396" />
+    <nuclide name="Cr50" ao="0.0007183154000000001" />
+    <nuclide name="Cr52" ao="0.013851997480000001" />
+    <nuclide name="Cr53" ao="0.0015707053200000002" />
+    <nuclide name="Cr54" ao="0.00039098180000000005" />
+    <nuclide name="Ni58" ao="0.0044314658055" />
+    <nuclide name="Ni60" ao="0.0017069926944999999" />
+    <nuclide name="Ni61" ao="7.420179049999999e-05" />
+    <nuclide name="Ni62" ao="0.0002365877775" />
+    <nuclide name="Ni64" ao="6.0251932e-05" />
+  </material>
+  <material id="3" name="Water at 23 C" temperature="900">
+    <density units="sum" />
+    <nuclide name="H1" ao="0.066691" />
+    <nuclide name="O16" ao="0.033333361866" />
+    <nuclide name="O17" ao="1.2638134e-05" />
+    <sab name="c_H_in_H2O" />
+  </material>
+</materials>
