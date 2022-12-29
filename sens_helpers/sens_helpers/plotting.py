@@ -62,7 +62,7 @@ def plot_source(is2D=False):
         ax = fig.add_subplot(1,2,1)
         plot_slice(fig, ax, source, '2D Source', 0, nmesh, is2D)
         ax = fig.add_subplot(1,2,2)
-        plot_slice(fig, ax, source/source_sd*100, 'Relative Error', 0, nmesh, is2D, error=True)
+        plot_slice(fig, ax, source_sd/source*100, 'Relative Error', 0, nmesh, is2D, error=True)
 
         fig.tight_layout()
         return [fig]
@@ -85,7 +85,7 @@ def plot_source(is2D=False):
                 ax = fig.add_subplot(2,3,i+1)
                 plot_slice(fig, ax, means[i], axis_names[i], n, nmesh, is2D)
                 ax = fig.add_subplot(2,3,i+4)
-                plot_slice(fig, ax, means[i]/sds[i]*100, axis_names[i], n, nmesh, is2D, error=True)
+                plot_slice(fig, ax, sds[i]/means[i]*100, axis_names[i], n, nmesh, is2D, error=True)
 
             fig.tight_layout()
             figures.append(fig)
