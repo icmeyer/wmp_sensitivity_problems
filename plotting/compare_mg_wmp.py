@@ -79,7 +79,6 @@ for nuc in nucs:
     dk_dp = wmp_sens # * mp_mean
     # dk_dp = wmp_sens 
 
-
     # Get mg sens from sensitivity run
     reactions = ['elastic', 'absorption'] + fissionable*['fission']
     reaction_labels = [r'$\sigma_{s}$', r'$\sigma_{\gamma}$', r'$\sigma_{f}$']
@@ -127,7 +126,7 @@ for nuc in nucs:
     # ax.set_yscale('symlog')
     
 
-    fig = plt.figure(figsize=(13,7))
+    fig = plt.figure(figsize=(14,8))
     if fissionable:
         axd = fig.subplot_mosaic(
             """
@@ -189,7 +188,7 @@ for nuc in nucs:
             ax.axvline(x=edges[i], alpha=alphas[i], linestyle='--', color='k')
         ax.set_xscale('log')
         ax.set_yscale('symlog')
-        ax.set_ylabel(r'Sensitivity per unit lethargy')
+        ax.set_ylabel('Sensitivity \nper unit lethargy')
         if r==(len(reactions)-1):
             ax.set_xlabel(r'Energy [eV]')
         ax.set_title(reaction_labels[r])
