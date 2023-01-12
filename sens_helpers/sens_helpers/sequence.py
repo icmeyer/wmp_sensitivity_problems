@@ -30,7 +30,6 @@ def replace_line(filename, old, new_str):
     with open(filename, 'r') as f:
         for line in f:
             line = line.strip()
-            print(line, regex, new_str)
             line = re.sub(regex, new_str, line)
             print(line)
             new += line
