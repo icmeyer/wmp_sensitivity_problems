@@ -46,7 +46,7 @@ def initialize_adjoint_run(clean_dir, nmesh, nbatches, nparticles):
     geometry = openmc.Geometry.from_xml(clean_dir + 'geometry.xml')
 
     settings.temperature['method'] = 'nearest'
-    settings.temperature['tolerance'] = 1000
+    settings.temperature['tolerance'] = 3000
     settings.temperature['multipole'] = True
 
     settings.particles = nparticles
