@@ -102,9 +102,8 @@ def plot_adjoint(is2D=False):
 
         figures = []
         fig = plt.figure(figsize=(11,4))
-        fig.suptitle('Adjoint')
         ax = fig.add_subplot(1,1,1)
-        plot_slice(fig, ax, adjoint, '2D Adjoint', 0, nmesh, is2D)
+        plot_slice(fig, ax, adjoint, 'Adjoint Slice', 0, nmesh, is2D)
 
         fig.tight_layout()
         return [fig]
@@ -123,7 +122,7 @@ def plot_adjoint(is2D=False):
 
             for i in range(3):
                 ax = fig.add_subplot(1,3,i+1)
-                plot_slice(fig, ax, means[i], axis_names[i], n, nmesh)
+                plot_slice(fig, ax, means[i], axis_names[i], n, nmesh, is2D)
 
             fig.tight_layout()
             figures.append(fig)
@@ -200,11 +199,18 @@ def get_all_tallies(tally_xml, tally_out):
         print(info['nuclide'], info['var'], info['reaction'])
     return sens_lib
 
+def get_tallies_from_dir(path):
+    tally_xml = path + 'tallies.xml'
+    tally_out = path + 'tallies.out'
+    return get_all_tallies(tally_xml, tally_out)
+
 def hist_y(x):
     return np.hstack([x[0], x])
 
-def plot_sens_err(ax, e_bins, sens, sens_sd=None, label=''):
+def plot_sens_err(ax, e_bins, sens, sens_sd=None, normalize=False, label=''):
     mids = (e_bins[:-1] + e_bins[1:])/2
+    if normalize:
+        sens = sens/(np.log(e_bins[1:]) - np.log(e_bins[:-1]))
     step = ax.step(e_bins, hist_y(sens), label=label)
     if sens_sd is not None:
         ax.errorbar(mids, sens, yerr=sens_sd, capsize=2, 
