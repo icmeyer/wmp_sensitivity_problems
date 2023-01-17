@@ -14,6 +14,7 @@ import openmc
 from .data import KEY_NUCLIDES
 from .openmc_help import get_nucs_from_mat_xml
 import importlib.resources as pkg_resources
+from .tables import make_capture_rate_table
 from . import templates  
 tally_template = pkg_resources.read_text(templates, 'tallies.xml')
 
@@ -244,6 +245,19 @@ def initialize_sensitivity_run(adjoint, mesh, nuclides, reactions, e_grid,
     # Creates the sensitivity tally. This tally takes in the importance filter
     # and the sensitivity object.
     tallies = openmc.Tallies(sens_list)
+
+    # Add tallies of the capture rates
+    tally = openmc.Tally(name='total absorption')
+    tally.scores = ['absorption']
+    tallies.append(tally)
+
+    all_nucs = get_nucs_from_mat_xml('materials.xml')
+    for nuclide in all_nucs:
+        tally = openmc.Tally(name='{:s} absorption'.format(nuclide))
+        tally.scores = ['absorption']
+        tally.nuclides = [nuclide]
+        tallies.append(tally)
+
     tallies.export_to_xml()
 
 def run_sensitivity_sequence(xml_dir, nmesh, adj_nbatches, adj_nparticles,
@@ -292,5 +306,8 @@ def run_sensitivity_sequence(xml_dir, nmesh, adj_nbatches, adj_nparticles,
         openmc.run(threads=16)
     else:
         openmc.run(threads=4)
+
+    benchmark_name = os.path.basename(os.path.normpath(basedir))
+    make_capture_rate_table(sp_file, './', benchmark_name)
 
     os.chdir(basedir)
