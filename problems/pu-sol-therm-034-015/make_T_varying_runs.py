@@ -1,6 +1,7 @@
 import os
 
 import sens_helpers
+import mpullse
 
 def make_T_run_with_materials_script(template_dir, T):
     # Copy the template directory
@@ -24,7 +25,7 @@ def submit_job(T):
     os.chdir(cwd)
 
 if __name__=='__main__':
-    Ts = [0, 1, 150, 1500, 2000]
+    Ts = mpullse.data.PU_TEMPS
     for T in Ts:
         make_T_run_with_materials_script('T_template', T)
         submit_job(T)

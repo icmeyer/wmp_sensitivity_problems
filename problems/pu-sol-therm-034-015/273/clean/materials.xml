@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <materials>
-  <material id="1" name="fissile solution" depletable="true">
+  <material id="1" name="fissile solution" depletable="true" temperature="273">
     <density units="sum" />
     <nuclide name="Pu238" ao="4.0405e-07" />
     <nuclide name="Pu239" ao="0.0008292" />
@@ -21,7 +21,7 @@
     <nuclide name="O17" ao="1.5814912e-05" />
     <sab name="c_H_in_H2O" />
   </material>
-  <material id="2" name="304L stainless steel">
+  <material id="2" name="304L stainless steel" temperature="273">
     <density units="sum" />
     <nuclide name="Fe54" ao="0.0036985991000000004" />
     <nuclide name="Fe56" ao="0.05806009612" />
@@ -37,7 +37,7 @@
     <nuclide name="Ni62" ao="0.0002365877775" />
     <nuclide name="Ni64" ao="6.0251932e-05" />
   </material>
-  <material id="3" name="Water at 23 C">
+  <material id="3" name="Water at 23 C" temperature="273">
     <density units="sum" />
     <nuclide name="H1" ao="0.066691" />
     <nuclide name="O16" ao="0.033333361866" />
